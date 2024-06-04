@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    double quantidade_compra, quantidade_total, desconto, preco, sobra;
+
+    quantidade_total = 100;
+
+    scanf("%lf", &quantidade_compra);
+
+    if (quantidade_compra > quantidade_total){
+        printf("Poxa, nao temos mais pendrives no estoque\n");
+    }
+    else{
+
+        preco = 5 * quantidade_compra;
+
+        if (quantidade_compra <= 5){
+            sobra = quantidade_total - quantidade_compra;
+            printf("Ainda existe estoque! O valor total eh de R$ %.2lf e sobraram %.lf pendrives no estoque\n", preco, sobra);
+        }
+        else if (quantidade_compra >= 6 && quantidade_compra <= 10){
+            sobra = quantidade_total - quantidade_compra;
+            desconto = preco * 0.95;
+            printf("Ainda existe estoque! O valor total eh de R$ %.2lf e sobraram %.lf pendrives no estoque\n", desconto, sobra);
+        }
+        else{
+            sobra = quantidade_total - quantidade_compra;
+            desconto = preco * 0.90;
+            printf("Ainda existe estoque! O valor total eh de R$ %.2lf e sobraram %.lf pendrives no estoque\n", desconto, sobra);
+        }
+    }
+	return 0;
+}
