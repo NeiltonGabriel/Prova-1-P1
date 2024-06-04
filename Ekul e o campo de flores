@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int vclima(char clima){
+
+    int valor;
+
+    if (clima == 'E'){
+        valor = 7;
+    }
+    else if (clima == 'C'){
+        valor = 5;
+    }
+    else if (clima == 'N'){
+        valor = 3;
+    }
+
+    return valor;
+}
+
+int horas(int minutos){
+
+    int thoras;
+
+    thoras = minutos / 60;
+
+    return thoras;
+}
+
+int vestacao(char estacao,  int valorI, int valorV, int valorP, int valorO){
+
+    int valor_estacao;
+    
+    if (estacao == 'I'){
+        valor_estacao = valorI;
+    }
+    if (estacao == 'V'){
+        valor_estacao = valorV;
+    }
+    if (estacao == 'P'){
+        valor_estacao = valorP;
+    }
+    if (estacao == 'O'){
+        valor_estacao = valorO;
+    }
+
+    return valor_estacao;
+}
+
+int chance_de_encontar_flor(int numero_estacao, int numero_horas, int numero_clima, int sono){
+
+    int chance;
+
+    chance = numero_estacao + (numero_horas % numero_clima) * sono;
+
+    return chance;
+}
+
+int main() {
+
+    int minuto, sono, disposicao, valor_clima, valor_da_estacao, valor_horas;
+    char lestacao, lclima;
+    int valorI, valorV, valorP, valorO;
+    int encontrar, nascer;
+
+    scanf("%d %d ", &minuto, &sono);
+    scanf(" %c %c ", &lestacao, &lclima);
+    scanf("%d %d %d %d", &valorI, &valorV, &valorP, &valorO);
+
+    valor_da_estacao = vestacao(lestacao, valorI, valorV, valorP, valorO);
+    valor_horas = horas(minuto);
+    valor_clima = vclima(lclima);
+
+    encontrar = chance_de_encontar_flor(valor_da_estacao, valor_horas, valor_clima, sono);
+    nascer = valor_da_estacao * 3;
+    disposicao = (19 * sono) / 2;
+
+    if (disposicao < 70){
+        printf("0%%, Ekul nao acordou disposto hoje :(\n");
+    }
+    else if (disposicao >= 70){
+
+        if (encontrar >= 100){
+        printf("100%%, Ekul possui chances de encontrar a flor :)\n");
+        }
+        else if (encontrar >= nascer){
+                printf("%d%%, Ekul possui chances de encontrar a flor :)\n", encontrar);
+        }
+        else if (encontrar < nascer){
+            printf("%d%%, Ekul nao possui chances de encontrar a flor :(\n", encontrar);
+        }
+    }
+	return 0;
+}
